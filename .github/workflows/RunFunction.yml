@@ -27,7 +27,7 @@ jobs:
       run: pip install -r ./requirements.txt
       
     - name: 修改早上步数
-      if: github.event.schedule == '0 23 * * *'
+      if: github.event.schedule == '0 0 * * *'
       run: python3 changebushu_Actionday.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
