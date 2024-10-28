@@ -7,7 +7,8 @@ on:
     - cron: '0 11 * * *'
     # 每天中午 12 点运行 script2.py
     - cron: '0 23 * * *'
-    
+  push:  # 在推送时触发
+  pull_request:  # 在拉取
 
 jobs: 
   ChangBuShu: 
@@ -27,7 +28,7 @@ jobs:
       
     - name: 修改早上步数
       if: github.event.schedule == '0 23 * * *'
-      run: python3 changebushu_Action.py
+      run: python3 changebushu_Actionday.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
@@ -38,6 +39,16 @@ jobs:
     - name: 修改晚上步数
       if: github.event.schedule == '0 11 * * *'
       run: python3 changebushu_Actionnight.py
+      env:
+        USER_PHONE: ${{ secrets.USER_PHONE }}
+        USER_PWD: ${{ secrets.USER_PWD }}
+        STEP: ${{ secrets.STEP }}
+        STEP_MIN: ${{ secrets.STEP_MIN }}
+        STEP_MAX: ${{ secrets.STEP_MAX }}
+
+    - name: 手动修改步数
+      if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+      run: python3 changebushu_Action.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
