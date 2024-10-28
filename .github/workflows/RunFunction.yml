@@ -16,19 +16,19 @@ jobs:
     if: true
     steps:
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       
     - name: Set up Python 3.6
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.6
+        python-version: '3.6'
         
     - name: 安装环境
       run: pip install -r ./requirements.txt
       
     - name: 修改早上步数
       if: github.event.schedule == '0 23 * * *'
-      run: python3 changebushu_Actionday.py
+      run: python changebushu_Actionday.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
@@ -38,7 +38,7 @@ jobs:
 
     - name: 修改晚上步数
       if: github.event.schedule == '0 10 * * *'
-      run: python3 changebushu_Actionnight.py
+      run: python changebushu_Actionnight.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
@@ -48,7 +48,7 @@ jobs:
 
     - name: 手动修改步数
       if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
-      run: python3 changebushu_Actionday.py
+      run: python changebushu_Actionday.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
