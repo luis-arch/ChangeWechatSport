@@ -1,4 +1,4 @@
-“# -*- coding: utf8 -*-
+# -*- coding: utf8 -*-
 
 import requests,time,re,json,random
 import os
