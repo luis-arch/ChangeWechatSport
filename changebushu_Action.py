@@ -178,5 +178,5 @@ if __name__ == "__main__":
     # step = str(randint(int(os.environ['STEP_MIN']), int(os.environ['STEP_MAX'])))
     # step = os.environ['STEP']
     # step = str(randint(5000, 8000)) 
-    step = 14215
+    step = 3815
     main(user,password,step)
