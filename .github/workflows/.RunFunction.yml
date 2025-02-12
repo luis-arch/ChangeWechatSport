@@ -1,6 +1,6 @@
 name: 修改微信步数
 
-on:
+#on:
   #workflow_dispatch:
   #schedule:
     # 每天早上 6 点运行 script1.py
