@@ -139,10 +139,10 @@ def main(user, passwd, step):
 def get_time():
     url = 'https://timeapi.io/api/Time/current/zone?timeZone=utc'
     headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'}
-    response = requests.get(url, headers=headers).json()
+    response_data = requests.get(url, headers=headers).json()
     # 解析时间数据
-    microseconds = response["milliSeconds"] * 1000  # 转换毫秒为微秒
-    timezone = ZoneInfo(response["timeZone"])
+    microseconds = response_data["milliSeconds"] * 1000  # 转换毫秒为微秒
+    timezone = ZoneInfo(response_data["timeZone"])
 
     # 创建时区感知的datetime对象
     dt = datetime(
@@ -156,7 +156,7 @@ def get_time():
         tzinfo=timezone)
     # 计算Unix时间戳（包含毫秒的浮点数）
     unix_timestamp = dt.timestamp()
-    t = str(int(unix_timestamp))
+    t = str(int(unix_timestamp))+'000'
     return t
 #获取app_token
 def get_app_token(login_token):
