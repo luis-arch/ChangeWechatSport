@@ -135,6 +135,7 @@ def main(user, passwd, step):
 #获取时间戳
 def get_time():
     url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
+    headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'}
     response = requests.get(url, headers=headers).json()
     t = str(response['unixtime'])+'000'
     return t
