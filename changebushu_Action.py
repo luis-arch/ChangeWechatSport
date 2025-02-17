@@ -2,6 +2,8 @@
 
 import requests,time,re,json,random
 import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 TG_BOT_TOKEN = ""           # telegram bot token 自行申请
 TG_USER_ID = ""             # telegram 用户ID
@@ -133,13 +135,29 @@ def main(user, passwd, step):
 # qqtalk = 'https://qmsg.zendee.cn/send/输入你的kye?msg=' + "修改步数：" + step + "  " + response[
 #        'message'] + '&qq=输入你的qq号'
 #获取时间戳
+
 def get_time():
-    url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
+    url = 'https://timeapi.io/api/Time/current/zone?timeZone=utc'
     headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'}
     response = requests.get(url, headers=headers).json()
-    t = str(response['unixtime'])+'000'
-    return t
+    # 解析时间数据
+    microseconds = response["milliSeconds"] * 1000  # 转换毫秒为微秒
+    timezone = ZoneInfo(response["timeZone"])
 
+    # 创建时区感知的datetime对象
+    dt = datetime(
+        response_data["year"],
+        response_data["month"],
+        response_data["day"],
+        response_data["hour"],
+        response_data["minute"],
+        response_data["seconds"],
+        microseconds,
+        tzinfo=timezone)
+    # 计算Unix时间戳（包含毫秒的浮点数）
+    unix_timestamp = dt.timestamp()
+    t = str(int(unix_timestamp))
+    return t
 #获取app_token
 def get_app_token(login_token):
     url = f"https://account-cn.huami.com/v1/client/app_tokens?app_name=com.xiaomi.hm.health&dn=api-user.huami.com%2Capi-mifit.huami.com%2Capp-analytics.huami.com&login_token={login_token}"
@@ -179,5 +197,5 @@ if __name__ == "__main__":
     # step = str(randint(int(os.environ['STEP_MIN']), int(os.environ['STEP_MAX'])))
     # step = os.environ['STEP']
     # step = str(randint(5000, 8000)) 
-    step = 4124
+    step = 4125
     main(user,password,step)
