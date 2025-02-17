@@ -142,7 +142,8 @@ def get_time():
     response_data = requests.get(url, headers=headers).json()
     # 解析时间数据
     microseconds = response_data["milliSeconds"] * 1000  # 转换毫秒为微秒
-    timezone = ZoneInfo(response_data["timeZone"])
+    #timezone = ZoneInfo(response_data["timeZone"])
+    timezone = ZoneInfo("Asia/Shanghai")
 
     # 创建时区感知的datetime对象
     dt = datetime(
@@ -156,7 +157,9 @@ def get_time():
         tzinfo=timezone)
     # 计算Unix时间戳（包含毫秒的浮点数）
     unix_timestamp = dt.timestamp()
+    
     t = str(int(unix_timestamp))+'000'
+    print(t)
     return t
 #获取app_token
 def get_app_token(login_token):
