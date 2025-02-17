@@ -137,7 +137,7 @@ def main(user, passwd, step):
 #获取时间戳
 
 def get_time():
-    url = 'https://timeapi.io/api/Time/current/zone?timeZone=utc'
+    url = 'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Shanghai'
     headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'}
     response_data = requests.get(url, headers=headers).json()
     # 解析时间数据
