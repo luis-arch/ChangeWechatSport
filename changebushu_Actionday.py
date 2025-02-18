@@ -2,6 +2,8 @@
 
 import requests,time,re,json,random
 import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 TG_BOT_TOKEN = ""           # telegram bot token 自行申请
 TG_USER_ID = ""             # telegram 用户ID
@@ -134,10 +136,29 @@ def main(user, passwd, step):
 #        'message'] + '&qq=输入你的qq号'
 #获取时间戳
 def get_time():
-    url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
+    url = 'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Shanghai'
     headers = {'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'}
-    response = requests.get(url, headers=headers).json()
-    t = str(response['unixtime'])+'000'
+    response_data = requests.get(url, headers=headers).json()
+    # 解析时间数据
+    microseconds = response_data["milliSeconds"] * 1000  # 转换毫秒为微秒
+    #timezone = ZoneInfo(response_data["timeZone"])
+    timezone = ZoneInfo("Asia/Shanghai")
+
+    # 创建时区感知的datetime对象
+    dt = datetime(
+        response_data["year"],
+        response_data["month"],
+        response_data["day"],
+        response_data["hour"],
+        response_data["minute"],
+        response_data["seconds"],
+        microseconds,
+        tzinfo=timezone)
+    # 计算Unix时间戳（包含毫秒的浮点数）
+    unix_timestamp = dt.timestamp()
+    
+    t = str(int(unix_timestamp))+'000'
+    print(t)
     return t
 
 #获取app_token
