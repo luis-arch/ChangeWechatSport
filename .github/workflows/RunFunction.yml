@@ -6,7 +6,7 @@ on:
     # 每天早上 6 点运行 script1.py
     - cron: '0 10 * * *'
     # 每天中午 12 点运行 script2.py
-    - cron: '55 23 * * *'
+    - cron: '7 0 * * *'
   push:  # 在推送时触发
   pull_request:  # 在拉取
 
@@ -27,7 +27,7 @@ jobs:
       run: pip install -r ./requirements.txt
       
     - name: 修改早上步数
-      if: github.event.schedule == '55 23 * * *'
+      if: github.event.schedule == '7 0 * * *'
       run: python changebushu_Actionday.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
