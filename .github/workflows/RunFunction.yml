@@ -37,7 +37,7 @@ jobs:
         STEP_MAX: ${{ secrets.STEP_MAX }}
 
     - name: 修改晚上步数
-      if: github.event.schedule == '0 10 * * *'
+      if: github.event.schedule == '40 10 * * *'
       run: python changebushu_Actionnight.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
