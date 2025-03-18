@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # 每天早上 6 点运行 script1.py
-    - cron: '0 10 * * *'
+    - cron: '40 10 * * *'
     # 每天中午 12 点运行 script2.py
     - cron: '59 23 * * *'
   push:  # 在推送时触发
