@@ -29,6 +29,8 @@ jobs:
     - name: 修改早上步数
       if: github.event.schedule == '59 23 * * *'
       run: python changebushu_Actionday.py
+      #run: python change_day.py
+
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
@@ -39,6 +41,7 @@ jobs:
     - name: 修改晚上步数
       if: github.event.schedule == '40 10 * * *'
       run: python changebushu_Actionnight.py
+      #run: python change_night.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
