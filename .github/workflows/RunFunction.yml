@@ -51,8 +51,8 @@ jobs:
 
     - name: 手动修改步数
       if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
-      run: python changebushu_Action.py
-      #run: python change.py
+      #run: python changebushu_Action.py
+      run: python change.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
