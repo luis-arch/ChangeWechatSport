@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # 每天早上 6 点运行 script1.py
-    - cron: '40 10 * * *'
+    - cron: '0 11 * * *'
     # 每天中午 12 点运行 script2.py
     - cron: '59 23 * * *'
   push:  # 在推送时触发
@@ -39,7 +39,7 @@ jobs:
         STEP_MAX: ${{ secrets.STEP_MAX }}
 
     - name: 修改晚上步数
-      if: github.event.schedule == '40 10 * * *'
+      if: github.event.schedule == '0 11 * * *'
       run: python changebushu_Actionnight.py
       #run: python change_night.py
       env:
