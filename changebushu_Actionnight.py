@@ -199,5 +199,5 @@ if __name__ == "__main__":
     password = os.environ['USER_PWD']
     # step = str(randint(int(os.environ['STEP_MIN']), int(os.environ['STEP_MAX'])))
     # step = os.environ['STEP']
-    step = str(random.randint(10417, 14475)) 
+    step = str(random.randint(8417, 12475)) 
     main(user,password,step)
