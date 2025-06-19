@@ -136,8 +136,11 @@ def main(user, passwd, step):
 def get_time():
     #url = 'http://worldtimeapi.org/api/timezone/Asia/Shanghai'
     url = 'https://acs.m.taobao.com/gw/mtop.common.getTimestamp/'
+    #response = requests.get(url, headers=headers).json()
+    #t = str(response['unixtime'])+'000'
+    #return t
     response = requests.get(url, headers=headers).json()
-    t = str(response['unixtime'])+'000'
+    t = response['data']['t']
     return t
 
 #获取app_token
