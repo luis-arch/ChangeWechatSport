@@ -40,8 +40,8 @@ jobs:
 
     - name: 修改晚上步数
       if: github.event.schedule == '0 11 * * *'
-      run: python changebushu_Actionnight.py
-      #run: python change_night.py
+      #run: python changebushu_Actionnight.py
+      run: python change_night.py
       env:
         USER_PHONE: ${{ secrets.USER_PHONE }}
         USER_PWD: ${{ secrets.USER_PWD }}
