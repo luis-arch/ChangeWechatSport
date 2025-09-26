@@ -50,6 +50,16 @@ def login(user,password):
         "token":"access"
         }
     r1 = requests.post(url1,data=data1,headers=headers,allow_redirects=False)
+    response_info = {
+    "status_code": r1.status_code,
+    "reason": r1.reason,
+    "url": r1.url,
+    "headers": dict(r1.headers),
+    "text_body": r1.text
+    }
+    print("登录情况如下：")
+    print(response_info)
+    print("输出完毕")
     location = r1.headers["Location"]
     try:
         code = get_code(location)
