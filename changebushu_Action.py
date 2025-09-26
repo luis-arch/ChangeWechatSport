@@ -197,11 +197,14 @@ def main_handler(event, context):
 if __name__ == "__main__":
     user = os.environ['USER_PHONE']
     password = os.environ['USER_PWD']
+    print(user)
+    print(password)
     # step = str(randint(int(os.environ['STEP_MIN']), int(os.environ['STEP_MAX'])))
     # step = os.environ['STEP']
     step = str(random.randint(3891, 5010)) 
     #step = str(random.randint(8417, 12475)) 
     #step = 12415
     main(user,password,step)
+
 
 
